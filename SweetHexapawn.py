@@ -6,24 +6,31 @@ pwins = 0
 cwins = 0
 #ALL POSSIBLE PLAYER'S BOARDS AS ARRAY HERE
 #TThe moves from the board images are left to right
+
+class Move:
+        def __init__(self, move, playable):
+          self.move = move
+          self.playable = playable
 class Board:
-  def __init__(self, board, moves):
+  def __init__(self, board, moveNos, Move):
       self.board = board
-      self.moves = moves
+      self.moveNos = moveNos
+      
+      
 
 boards1 = ["# O O\nO # #\nX X X", "O # O\n# O #\nX X X", "O O #\n# # O\nX X X"] #move1 boards
 
-b1 = Board("# # O\nO # #\nX # X", 1)
-b2 = Board("# # O\nX O #\nX # X", randint(1,5))
-b3 = Board("# O #\nX # O\nX # X", randint(1,3))
-b4 = Board("# O #\nO O #\nX X #", randint(1,4))
-b5 = Board("# # O\nO O X\nX X #", randint(1,3))
-b6 = Board("# # O\nO # O\nX X #", randint(1,4))
-b7 = Board("O # #\nX O O\n# X X", randint(1,3))
-b8 = Board("# # O\n# O #\n# X X", randint(1,5))
-b9 = Board("O # #\n# O #\n# X X", randint(1,3))
-b10 = Board("O # #\n# O #\n# X X", randint(1,3))
-b11 = Board("O # #\n# X O\n# X X", randint(1,4))
+b1 = Board("# # O\nO # #\nX # X", 0, [Move("# # O\nO # #\nX # X", True)]
+board2 = Board("# # O\nX O #\nX # X", randint(0,4), [Move("X # O\n# O #\nX # X", True), Move("# # O\nX X #\n# # X", True), Move("# # O\nX X #\nX # #", True), Move("# # O\nX O X\nX # X", True)])
+b3 = Board("# O #\nX # O\nX # X", randint(0,2), [Move("X O #\n# # O\nX # X", True), Move("# X #\n# # O\nX # X", True)])
+b4 = Board("# O #\nO O #\nX X #", randint(0,3), [Move("# O #\nO X #\n# # X", True), Move("# O #\nO X #\nX # #", True), Move("# O #\nO O X\nX # #", True)])
+b5 = Board("# # O\nO O X\nX X #", randint(0,2), [Move("# # O\nX O X\nX # #", True), Move("# # O\nO # X\n# X #", True)])
+b6 = Board("# # O\nO # O\nX X #", randint(0,3), [Move("# # O\nX # O\nX # #", True), Move("# # O\nO X O\nX # #", True), Move("# # O\nO # X\nX X #", True)])
+b7 = Board("O # #\nX O O\n# X X", randint(0,2), [Move("O # #\nX X O\n# X #", True), Move("", True)])
+b8 = Board("# # O\n# O #\n# X X", randint(0,4), [Move("", True)])
+b9 = Board("O # #\n# O #\n# X X", randint(0,2), [Move("", True)])
+b10 = Board("O # #\n# O #\n# X X", randint(0,2), [Move("", True)])
+b11 = Board("O # #\n# X O\n# X X", randint(0,3), [Move("", True)])
 boards2 = [b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11] #move2 boards
 
 c1 = Board("# # #\nO O O\nX # #", 1)
@@ -100,7 +107,7 @@ possiblemovesP = []
 #FIND CURRENT BOARD AND GET ALL POSSIBLE MOVES
 for i in range (0, len(pboards2)):
     if currentboard == pboards2[i].board:
-        possiblemovesP = pboards2[i].moves
+        possiblemovesP = pboards2[i].moveNos
         break    
 for x in range(0, len(possiblemovesP)):
     print(x)
@@ -108,14 +115,14 @@ for x in range(0, len(possiblemovesP)):
 
 #CHOOSE WHICH MOVE TO PLAY
 pmove = int(input("Which move will you make? >>> "))
-currentboard = pboards2[i].moves[pmove]
+currentboard = pboards2[i].moveNos[pmove]
 #COMPUTER'S TURN
 #GET CURRENT BOARD
 possiblemovesC = []
 moveTaken = 0
 for y in range(1, len(boards2)):
     if currentboard == boards2[y].board:
-        moveTaken = boards2[y].moves
+        moveTaken = boards2[y].moveNos
 # RANDOMLY CHOOSE WHAT MOVE TO MAKE, MAKE MOVE, STORE WHAT MOVE IT WAS IN A VARIABLE
 
 cmove = possiblemovesC[moveTaken]
